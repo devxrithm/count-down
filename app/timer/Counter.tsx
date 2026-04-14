@@ -2,18 +2,18 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const Counter = () => {
-  const [timeLeft, setTimeLeft] = useState(30 * 60 * 60 * 1000); // 30 hours in ms
+  const [timeLeft, setTimeLeft] = useState(30 * 60 * 60 * 1000);
   const [running, setRunning] = useState(false);
-  const intervalRef = useRef(null);
-  const endTimeRef = useRef(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const endTimeRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (running) {
       endTimeRef.current = Date.now() + timeLeft;
       intervalRef.current = setInterval(() => {
-        const distance = endTimeRef.current - Date.now();
+        const distance = (endTimeRef.current ?? 0) - Date.now();
         if (distance <= 0) {
-          clearInterval(intervalRef.current);
+          clearInterval(intervalRef.current!);
           setTimeLeft(0);
           setRunning(false);
           return;
@@ -21,10 +21,10 @@ const Counter = () => {
         setTimeLeft(distance);
       }, 1000);
     } else {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current!);
     }
 
-    return () => clearInterval(intervalRef.current);
+    return () => clearInterval(intervalRef.current!);
   }, [running]);
 
   const hours = Math.floor(timeLeft / (1000 * 60 * 60));
