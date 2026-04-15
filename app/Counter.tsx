@@ -36,7 +36,6 @@ const Counter = () => {
   }, []);
 
   const timeUnits = [
-    { value: day, label: 'Days' },
     { value: hours, label: 'Hours' },
     { value: min, label: 'Minutes' },
     { value: sec, label: 'Seconds' },
