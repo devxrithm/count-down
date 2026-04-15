@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const Counter = () => {
-  const [timeLeft, setTimeLeft] = useState(30 * 60 * 60 * 1000);
+  const [timeLeft, setTimeLeft] = useState(14 * 60 * 60 * 1000);
   const [running, setRunning] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const endTimeRef = useRef<number | null>(null);
@@ -39,7 +39,7 @@ const Counter = () => {
 
   const handleReset = () => {
     setRunning(false);
-    setTimeLeft(30 * 60 * 60 * 1000);
+    setTimeLeft(14 * 60 * 60 * 1000);
   };
 
   return (
